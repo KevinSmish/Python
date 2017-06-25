@@ -94,10 +94,18 @@ print('Reverse:',user)
 
 del user[4:6]
 print('Del 4,5:',user)
+
+lst1 = ['One','Two','Three']
+print("Список lst1=",lst1)
+print("Элемент 'Three' находится на %d позиции"%lst1.index('Three'))
+print("Есть ли элемент 'Three' в списке:",'Three' in lst1)
+print("Есть ли элемент 'Four' в списке:",'Four' in lst1)
+print("Преобразуем список в строку:", ", ".join(lst1))
 #----------------------------------------------------------------------------------------------- 005_Tuple.py
 c_tuple = ['Red','White','Black','Blue']
 a,b,c,d=c_tuple
 print(b)
+one_tuple = 1,
 #----------------------------------------------------------------------------------------------- 006_Set.py
 set1 = {'Red','White','Black','Blue'}
 print(len(set1))
