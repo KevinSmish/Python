@@ -184,15 +184,19 @@ print(var.lower())
 print(var.rstrip())
 print(var.lstrip())
 print(var.strip())
-#----------------------------------------------------------------------------------------------- 011_for_and_if.py
-list = [1,2,3,4,5]
+#----------------------------------------------------------------------------------------------- 011_function.py
+# -*- coding: cp1251 -*-
 
-for elem in list:
-	if elem==2:
-		print("sorry, we are out of element 2 right now")
-	else:
-		print(elem)
-print("\nFinished making your pizza")
+def MyFunc(*args, **kwargs):
+	print( args )
+	print( kwargs )
+
+Delegate= MyFunc(1, 2, 3, name="Mike", job="programmer")
+Delegate # Вызов функции!
+
+# Результат:
+# (1, 2, 3)
+# {'job': 'programmer', 'name': 'Mike'}
 #----------------------------------------------------------------------------------------------- 012_dict.py
 dict = {
 	'Иван':'инженер',
