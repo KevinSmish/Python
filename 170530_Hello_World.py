@@ -477,6 +477,89 @@ print(t[3])                              # 9
 lst=['я','не','готов','к','тестированию']
 s1=[x for x in lst if x!='не']               # ['я','готов','к','тестированию']
 print(*s1)                                   # я готов к тестированию
+#----------------------------------------------------------------------------------------------- 032_Lambda.py
+def fun(x):                      # Замыкание — это функция python, которая ссылается 
+    def zam(z):                  # на свободные переменные в лексическом контексте.
+        return x+z               # захват 'x' из внешнего контекста
+    return zam
+
+zam = fun(10)
+print(zam(5))                    # fun(10):zam(5):10+5=15 
+
+spisok = [1,4,11,2,24,-3,5,15]   # filter() — (функция, последовательность) — возвращает последовательность, 
+t = filter(lambda x: x<5, spisok)# состоящую из тех элементов последовательности, для которых функция является истинной.
+print(*t)                        # [1, 4, 2, -3]
+
+
+spisok1 = [2,6,7,0]              # map() — (функция, последовательность) — совершает вызов функция (элемент)
+listik1 = [2,5,3,9]              # с каждым элементом последовательности и возвращает список из возвращавшихся функцией значений.
+t=map (lambda x,y: x*y, spisok1, listik1) # Перемножим между собой два списка:
+print(*t)                        # [4, 30, 21, 0]
+
+from functools import reduce
+
+posled = [2,3,4,5,6,7]           # reduce() — (функция, последовательность) — возвращает единственное значение,
+t=reduce(lambda res,x: res*x, posled) #  собранное из результатов вызовов двухаргументной функции с первыми двумя 
+                                 # элементами последовательности; затем с полученным результатом и последующим элементом.
+print(t)			 # 5040
+				 # Последовательность вычислений: (((((1*2)*3)*4)*5)*6)*7
+#----------------------------------------------------------------------------------------------- 033 Class.py
+# -*- coding: cp1251 -*-
+
+class Person:
+	def __init__(self,name):
+		# pass
+		self.__name = name
+	def GetName(self):
+		return self.__name
+	def Exclaim(self):
+		print("I'm a Person")
+	def get_prof(self):
+		print("Call get_prof")
+		return self.prof
+	def set_prof(self, prof):
+		print("Call set_prof")
+		self.prof = prof
+	profession = property(get_prof,set_prof)
+
+class Manager(Person):
+	def Exclaim(self):
+		print("I'm a Manager")
+		super().Exclaim()
+	#------------------------------------------------
+	@classmethod
+	def MyClassMethod(cls):
+		print("MyClassMethod - Это метод класса")
+	#------------------------------------------------
+	@staticmethod
+	def MyStaticMethod():
+		print("MyStaticMethod - Это статический метод. Он не зависит от класса")
+
+
+hunter = Manager('Elmer Fudd')
+print(hunter.GetName())
+hunter.Exclaim()
+print("-----------------")
+print("To Person:")
+Person(hunter).Exclaim()
+print("-----------------")
+hunter.profession = "CEO"
+print(hunter.profession)
+hunter.MyClassMethod()
+hunter.MyStaticMethod()
+#----------------------------------------------------------------------------------------------- 034 RegEx.py
+# -*- coding: cp1251 -*-
+
+import re
+
+source = 'папа у Васи силен в математике, учится папа за Васю весь год.'
+#pattern = 'папа'
+#result = re.match(pattern,source)
+pattern = re.compile('папа')
+result = pattern.match(source)
+if result:
+	print(result.group())
+#----------------------------------------------------------------------------------------------- 
 #----------------------------------------------------------------------------------------------- Замыкание
 def fun(x):                      # Замыкание — это функция python, которая ссылается 
     def zam(z):                  # на свободные переменные в лексическом контексте.
