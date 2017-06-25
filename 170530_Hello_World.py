@@ -138,20 +138,43 @@ j = 1
 while j<4:
 	print(j)
 	j+=1
-print('End')
+print('End of part one')
+# ----------------------
+lst = [1,2,3,5,7,9]
+pos = 0
+while pos < len(lst):
+	num = lst[pos]
+	pos +=1
+	if num==1:
+		continue
+	elif num == 0:
+		break
+	print("1/%d=%f"%(num,1/num))
+else:
+	print("На 0 делить не пытались :)")
 #----------------------------------------------------------------------------------------------- 009_for.py
 chars = ('A','B','C')
 fruit = {'Apple', 'Banana', 'Cherry'}
 dict = {'Имя':'Иван','Отчество':'Иванович','Фамилия':'Иванов'}
 #print(dict['Имя'])
-#
+#---------------------------
 for item in zip(chars,fruit):
 	print(item)
-#
+#---------------------------
 for key, value in dict.items():
 	if key=='Отчество':
 		continue
 	print(key,'=',value)
+#---------------------------
+lst = [1,2,3,5,7,9]
+for num in lst:
+	if num==1:
+		continue
+	elif num == 0:
+		break
+	print("1/%d=%f"%(num,1/num))
+else:
+	print("На 0 делить не пытались :)")
 #----------------------------------------------------------------------------------------------- 010_Strings.py
 var=' привет, люди! '
 print(var.title())
