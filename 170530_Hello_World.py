@@ -1,17 +1,34 @@
 #----------------------------------------------------------------------------------------------- 001_HelloWorld.py
+import this		# Пасхальное яйцо Python
+
 var = 'Hello, World!'
 a,b,c=1,2,3
 
+print()
 print(var)
+user = input('I am Python. What is your name? ')
+print('Hello, ',user)
+
 print('a=',a)
 print('b=',b)
 print('c=',c)
 
 print(type(var))
 print(dir(var))
-#----------------------------------------------------------------------------------------------- 002_Input.py
-user = input('I am Python. What is your name? ')
-print('Hello, ',user)
+#----------------------------------------------------------------------------------------------- 002_Types.py
+MyDigitalNumberBin = 0b100101
+MyDigitalNumberOct = 0o45
+MyDigitalNumberHex = 0x25
+MyDigitalNumberFromStr = int("37")
+
+MyFloat = float("12.3")
+
+print(MyDigitalNumberBin)
+print(MyDigitalNumberOct)
+print(MyDigitalNumberHex,'\n',MyDigitalNumberFromStr)
+
+print(MyFloat)
+print(10**100)
 #----------------------------------------------------------------------------------------------- 003_If.py
 a=2
 b=3
@@ -65,6 +82,16 @@ print(len(set1))
 #
 print('Green' in set1)
 #----------------------------------------------------------------------------------------------- 007_iif.py
+# if - вариант 1
+a=2
+b=3
+c=a if (a<b) else b
+print(c)
+
+nm = 7*2
+print(nm, ' - число','четное' if (nm %2 == 0) else 'нечетное')
+
+# if - вариант 2
 num = int(input('Input a number:'))
 if num > 5:
 	print('>5')
