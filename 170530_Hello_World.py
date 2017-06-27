@@ -583,4 +583,89 @@ t=reduce(lambda res,x: res*x, posled) #  собранное из результ�
                                  # элементами последовательности; затем с полученным результатом и последующим элементом.
 print(t)			 # 5040
 				 # Последовательность вычислений: (((((1*2)*3)*4)*5)*6)*7
+#----------------------------------------------------------------------------------------------- 170627 TestFile.py
+# -*- coding: cp1251 -*-
+import os
+
+SomeText = "Небольшой блок текста."
+
+f = open('test1.txt','wt')
+f.write(SomeText)
+print(SomeText,file=f)
+print(SomeText,file=f,sep='',end='')
+f.close()
+
+with open('music.db','rb') as f:
+	f.seek(12)		# Перешли к 12-му символу
+	print(f.tell())		# Текущее смещение в байтах
+
+	f.seek(1,os.SEEK_CUR)	# Сдвинемся на 1 байт от текущей позиции
+	print(f.tell())		# Текущее смещение в байтах
+
+	f.seek(1,os.SEEK_END)	# Сдвинемся на 1 байт c конца файла
+	print(f.tell())		# Текущее смещение в байтах
+
+	f.seek(8170)		
+	r = f.read()
+	print(len(r))
+	print(r)
+#----------------------------------------------------------------------------------------------- 170627 TestXML.py
+# -*- coding: cp1251 -*-
+
+# menu.xml
+# ....................................
+# <?xml version="1.0"?>
+# <menu>
+# <breakfast hours="7-11">
+# <item price="$6.00">breakfast burritos</item>
+# <item price="$4.00">pancakes</item>
+# </breakfast>
+# <lunch hours="11-3">
+# <item price="$5.00">hamburger</item>
+# </lunch>
+# <dinner hours="3-10">
+# <item price="8.00">spaghetti</item>
+# </dinner>
+# </menu>
+# ....................................
+
+import xml.etree.ElementTree as et
+tree = et.ElementTree(file='menu.xml')
+root = tree.getroot()
+print(root.tag)				# 'menu'
+for child in root:
+	print('tag:', child.tag, 'attributes:', child.attrib)
+for grandchild in child:
+	print('\ttag:', grandchild.tag, 'attributes:', grandchild.attrib)
+#...
+#tag: breakfast attributes: {'hours': '7-11'}
+#tag: item attributes: {'price': '$6.00'}
+#tag: item attributes: {'price': '$4.00'}
+#tag: lunch attributes: {'hours': '11-3'}
+#tag: item attributes: {'price': '$5.00'}
+#tag: dinner attributes: {'hours': '3-10'}
+#tag: item attributes: {'price': '8.00'}
+print(len(root))			# количество разделов menu
+#3
+print(len(root[0])) 			# количество элементов breakfast
+#2
+#----------------------------------------------------------------------------------------------- 170627 TestJSON.py
+# -*- coding: cp1251 -*-
+
+import json
+import codecs
+
+with codecs.open("menu.json","rt") as f:
+	js = json.load(f)
+
+print(js)
+menu2 = json.dumps(js)
+print(menu2)
+#{'breakfast': {'items': {'breakfast burritos': '$6.00', 'pancakes':
+#'$4.00'}, 'hours': '7-11'}, 'lunch': {'items': {'hamburger': '$5.00'},
+#'hours': '11-3'}, 'dinner': {'items': {'spaghetti': '$8.00'}, 'hours': '3-10'}}
 #----------------------------------------------------------------------------------------------- 
+#----------------------------------------------------------------------------------------------- 
+#----------------------------------------------------------------------------------------------- 
+#----------------------------------------------------------------------------------------------- 
+
