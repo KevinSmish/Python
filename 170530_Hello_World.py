@@ -1173,6 +1173,21 @@ print("Sum:")
 print(names_2015_2016.groupby('Gender').sum())
 print("Max:")
 print(names_2015_2016.groupby('Gender').max())
+#----------------------------------------------------------------------------------------------- 170702 TestPandas-1.py
+# -*- coding: cp1251 -*-
+
+import pandas as pd
+#import numpy as np
+
+def count_to_len(row):
+	row.Count = len(row.Name)
+	return row
+
+names = pd.read_csv(r'E:\KVN\!CODE\PYTHON\170702 TestPandas_yob2016.txt') #, names=['Name','Gender','Count’])
+# print(names.columns)
+
+print("Print only boys")
+print(names[names.Name=='Alex'])
 #----------------------------------------------------------------------------------------------- 170703 TestMatPlotLib.py
 # -*- coding: cp1251 -*-
 
