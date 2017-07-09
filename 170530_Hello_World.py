@@ -572,7 +572,15 @@ print("[french]=",cfg['french'])
 print("[french]=",cfg['french']['greeting'])
 print("[files][home]=",cfg['files']['home'])
 print("[files][verify]=",cfg['files']['verify'])
-#----------------------------------------------------------------------------------------------- 
+#----------------------------------------------------------------------------------------------- 036 Processes.py
+import os
+import subprocess
+
+print('pid process           : {0:d}'.format(os.getpid()))	#pid process
+print('Current work directory: {0}'.format(os.getcwd()))	# current work directory
+
+print('Date:',subprocess.getoutput("date /T"))			# getoutput - процесс возвращает string
+print('Date:',subprocess.getstatusoutput("date /T"))		# getstatusoutput - кортеж код статуса и результат
 #----------------------------------------------------------------------------------------------- 
 #----------------------------------------------------------------------------------------------- 
 #----------------------------------------------------------------------------------------------- 
