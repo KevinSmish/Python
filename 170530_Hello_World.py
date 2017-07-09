@@ -588,7 +588,7 @@ import socket
 server_address=('localhost',6789)
 max_size=4096
 print('Starting client at',datetime.now())
-client = socket.socket(socket.AF_INET,socket.SOCK_DGRAM) # For UDP - socket.SOCK_DGRAM, for FTP - socket.SOCK_STREAM
+client = socket.socket(socket.AF_INET,socket.SOCK_DGRAM) # For UDP - socket.SOCK_DGRAM
 client.sendto(b'Hey!',server_address)
 data,server = client.recvfrom(max_size)
 print('At',datetime.now(),server,' said ',data)
@@ -601,7 +601,7 @@ server_address=('localhost',6789)
 max_size=4096
 print('Starting server at',datetime.now())
 print('Waiting for a client to call.')
-server = socket.socket(socket.AF_INET,socket.SOCK_DGRAM) # For UDP - socket.SOCK_DGRAM, for FTP - socket.SOCK_STREAM
+server = socket.socket(socket.AF_INET,socket.SOCK_DGRAM) # For UDP - socket.SOCK_DGRAM
 server.bind(server_address)
 data,client = server.recvfrom(max_size)
 print('At',datetime.now(),client,' said ',data)
@@ -614,13 +614,13 @@ import socket
 server_address=('localhost',6789)
 max_size=1000
 print('Starting client at',datetime.now())
-client = socket.socket(socket.AF_INET,socket.SOCK_STREAM) # For UDP - socket.SOCK_DGRAM, for FTP - socket.SOCK_STREAM
+client = socket.socket(socket.AF_INET,socket.SOCK_STREAM) # For FTP - socket.SOCK_STREAM
 client.connect(server_address)
 client.sendall(b'Hey!')
 data = client.recv(max_size)
 print('At',datetime.now(), 'someone replied ',data)
 client.close()
-#----------------------------------------------------------------------------------------------- 
+#----------------------------------------------------------------------------------------------- 038 SocketsServer_FTP.py
 from datetime import datetime
 import socket
 
@@ -628,7 +628,7 @@ server_address=('localhost',6789)
 max_size=1000
 print('Starting server at',datetime.now())
 print('Waiting for a client to call.')
-server = socket.socket(socket.AF_INET,socket.SOCK_STREAM) # For UDP - socket.SOCK_DGRAM, for FTP - socket.SOCK_STREAM
+server = socket.socket(socket.AF_INET,socket.SOCK_STREAM) # For FTP - socket.SOCK_STREAM
 server.bind(server_address)
 server.listen(5)
 client,addr = server.accept()
@@ -637,8 +637,22 @@ print('At',datetime.now(),client,' said ',data)
 client.sendall(b'Are you talking to me?')
 client.close()
 server.close()
-#----------------------------------------------------------------------------------------------- 038 SocketsServer_FTP.py
-#----------------------------------------------------------------------------------------------- 
+#----------------------------------------------------------------------------------------------- 039_TestRPC_Client.py
+import xmlrpc.client
+
+proxy = xmlrpc.client.ServerProxy("http://localhost:6789/")
+num = 7
+result = proxy.double(num)
+print("Double %s is %s"%(num,result))
+#----------------------------------------------------------------------------------------------- 039_TestRPC_Server.py
+from xmlrpc.server import SimpleXMLRPCServer
+
+def double(num):
+	return num*2
+
+server=SimpleXMLRPCServer(("localhost",6789))
+server.register_function(double,"double")
+server.serve_forever()
 #----------------------------------------------------------------------------------------------- 
 #----------------------------------------------------------------------------------------------- 
 #----------------------------------------------------------------------------------------------- 
