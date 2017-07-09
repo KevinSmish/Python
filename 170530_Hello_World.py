@@ -662,7 +662,7 @@ def double(num):
 server=SimpleXMLRPCServer(("localhost",6789))
 server.register_function(double,"double")
 server.serve_forever()
-#----------------------------------------------------------------------------------------------- 039 TestPylint.py
+#----------------------------------------------------------------------------------------------- 040 TestPylint.py
 # -*- coding: cp1251 -*-
 ''' Тестирование функции reduce '''
 
@@ -671,6 +671,55 @@ from functools import reduce
 sm = reduce(lambda a, x: a + x, [0, 1, 2, 3, 4])
 print(sm)			# Сумма
 # pylint.exe 040_TestPylint.py >0
+#----------------------------------------------------------------------------------------------- 041 CountRunTime.py
+# -*- coding: cp1251 -*-
+''' Тестирование функции reduce '''
+
+from functools import reduce
+
+sm = reduce(lambda a, x: a + x, [0, 1, 2, 3, 4])
+print(sm)			# Сумма
+# pylint.exe 040_TestPylint.py >0
+#----------------------------------------------------------------------------------------------- 041 CountRunTime.py
+import time
+
+t_begin = time.time()
+num = 52394023093446
+num *=23434563563245
+print(num)
+time.sleep(1)
+print(time.time()-t_begin)
+
+t_begin = time.time()
+result = []
+for value in range(1000000):
+	result.append(value)
+time.sleep(1)
+print("for:",time.time()-t_begin)
+
+t_begin = time.time()
+result = [value for value in range(1000000)]
+time.sleep(1)
+print("gen:",time.time()-t_begin)
+
+ok = input("Is it ok?")
+#----------------------------------------------------------------------------------------------- 042 TestNumPy.py
+import numpy as np
+
+# 4x + 5y = 20
+#  x + 2y = 13
+
+coefficients = np.array([[4,5],[1,2]])
+depends = np.array([20,13])
+answers = np.linalg.solve(coefficients,depends)
+print(answers)
+print(coefficients[0,0], "*", answers[0]," + ",coefficients[0,1], "*", answers[1],"=",depends[0],"->",coefficients[0,0]*answers[0]+coefficients[0,1]*answers[1])
+print(coefficients[1,0], "*", answers[0]," + ",coefficients[1,1], "*", answers[1],"=",depends[1],"->",coefficients[1,0]*answers[0]+coefficients[1,1]*answers[1])
+
+ok = input("Is it ok?")
+#----------------------------------------------------------------------------------------------- 
+#----------------------------------------------------------------------------------------------- 
+#----------------------------------------------------------------------------------------------- 
 #----------------------------------------------------------------------------------------------- 
 #----------------------------------------------------------------------------------------------- 
 #----------------------------------------------------------------------------------------------- 
