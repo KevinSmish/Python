@@ -581,19 +581,19 @@ print('Current work directory: {0}'.format(os.getcwd()))	# current work director
 
 print('Date:',subprocess.getoutput("date /T"))			# getoutput - процесс возвращает string
 print('Date:',subprocess.getstatusoutput("date /T"))		# getstatusoutput - кортеж код статуса и результат
-#----------------------------------------------------------------------------------------------- 037 SocketsClient.py
+#----------------------------------------------------------------------------------------------- 037 SocketsClient_UDP.py
 from datetime import datetime
 import socket
 
 server_address=('localhost',6789)
 max_size=4096
 print('Starting client at',datetime.now())
-client = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+client = socket.socket(socket.AF_INET,socket.SOCK_DGRAM) # For UDP - socket.SOCK_DGRAM, for FTP - socket.SOCK_STREAM
 client.sendto(b'Hey!',server_address)
 data,server = client.recvfrom(max_size)
 print('At',datetime.now(),server,' said ',data)
 client.close()
-#----------------------------------------------------------------------------------------------- 037 SocketsServer.py
+#----------------------------------------------------------------------------------------------- 037 SocketsServer_UDP.py
 from datetime import datetime
 import socket
 
@@ -601,12 +601,45 @@ server_address=('localhost',6789)
 max_size=4096
 print('Starting server at',datetime.now())
 print('Waiting for a client to call.')
-server = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+server = socket.socket(socket.AF_INET,socket.SOCK_DGRAM) # For UDP - socket.SOCK_DGRAM, for FTP - socket.SOCK_STREAM
 server.bind(server_address)
 data,client = server.recvfrom(max_size)
 print('At',datetime.now(),client,' said ',data)
 server.sendto(b'Are you talking to me?',client)
 server.close()
+#----------------------------------------------------------------------------------------------- 038 SocketsClient_FTP.py
+from datetime import datetime
+import socket
+
+server_address=('localhost',6789)
+max_size=1000
+print('Starting client at',datetime.now())
+client = socket.socket(socket.AF_INET,socket.SOCK_STREAM) # For UDP - socket.SOCK_DGRAM, for FTP - socket.SOCK_STREAM
+client.connect(server_address)
+client.sendall(b'Hey!')
+data = client.recv(max_size)
+print('At',datetime.now(), 'someone replied ',data)
+client.close()
+#----------------------------------------------------------------------------------------------- 
+from datetime import datetime
+import socket
+
+server_address=('localhost',6789)
+max_size=1000
+print('Starting server at',datetime.now())
+print('Waiting for a client to call.')
+server = socket.socket(socket.AF_INET,socket.SOCK_STREAM) # For UDP - socket.SOCK_DGRAM, for FTP - socket.SOCK_STREAM
+server.bind(server_address)
+server.listen(5)
+client,addr = server.accept()
+data = client.recv(max_size)
+print('At',datetime.now(),client,' said ',data)
+client.sendall(b'Are you talking to me?')
+client.close()
+server.close()
+#----------------------------------------------------------------------------------------------- 038 SocketsServer_FTP.py
+#----------------------------------------------------------------------------------------------- 
+#----------------------------------------------------------------------------------------------- 
 #----------------------------------------------------------------------------------------------- 
 #----------------------------------------------------------------------------------------------- 
 #----------------------------------------------------------------------------------------------- 
