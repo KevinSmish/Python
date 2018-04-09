@@ -121,6 +121,19 @@ print("Элемент 'Three' находится на %d позиции"%lst1.in
 print("Есть ли элемент 'Three' в списке:",'Three' in lst1)
 print("Есть ли элемент 'Four' в списке:",'Four' in lst1)
 print("Преобразуем список в строку:", ", ".join(lst1))
+
+print("===========================================")
+
+def sortByFirst(tp):
+        return tp[0]
+
+lst = [(7,2),(2,5)]
+lst.append((3,4))
+print("Unsorted: ",lst)
+lst.sort(key=sortByFirst)
+print("Sorted by first: ",lst)
+lst.sort(key=lambda a: a[1], reverse=True)
+print("Sorted by second (desc): ",lst)
 #----------------------------------------------------------------------------------------------- 005_Tuple.py
 c_tuple = ['Red','White','Black','Blue']
 a,b,c,d=c_tuple
