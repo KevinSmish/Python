@@ -86,41 +86,42 @@ print('Отформатированная строка: {n:2d}, {m:10.4f}, {k:>1
 #----------------------------------------------------------------------------------------------- 004_List.py
 user = ['Top','Left','Bottom','Right']
 
-print(user[0][1])                       # второй символ первого элемента
-print(user[-1])                         # последний элемент
+print(user[0][1])                       # второй символ первого элемента - 
+print(user[-1])                         # последний элемент              - Right
 user.append('None')
-print(user[-1])                         # последний элемент
+print(user[-1])                         # последний элемент              - None
 
-user.insert(2,'After Left')
-print(user)
+user.insert(2,'After Left')				
+print(user)                             # ['Top', 'Left', 'After Left', 'Bottom', 'Right', 'None']
 
 user1 = ['None','None','None']
 user.extend(user1)
-print(user)
-print('counts of None=',user.count('None'))				# Кол-во вхождений элемента в список
-print('Length of User:',len(user))
+print(user)								# ['Top', 'Left', 'After Left', 'Bottom', 'Right', 'None', 'None', 'None', 'None']
+
+print('counts of None=',user.count('None'))	# Кол-во вхождений элемента в список - counts of None= 4
+print('Length of User:',len(user))		# Length of User: 9
 
 user.remove('None')
-print('Remove first None:',user)
+print('Remove first None:',user)		# Remove first None: ['Top', 'Left', 'After Left', 'Bottom', 'Right', 'None', 'None', 'None']
 
-print(user.pop(5))						# Удалить i-тый элемент и вернуть его
-print(user)
+print(user.pop(5))						# Удалить i-тый элемент и вернуть его - None
+print(user)								# ['Top', 'Left', 'After Left', 'Bottom', 'Right', 'None', 'None']
 
 user.sort()
-print('Sort:',user)
+print('Sort:',user)						# Sort: ['After Left', 'Bottom', 'Left', 'None', 'None', 'Right', 'Top']
 
 user.reverse()
-print('Reverse:',user)
+print('Reverse:',user)					# Reverse: ['Top', 'Right', 'None', 'None', 'Left', 'Bottom', 'After Left']
 
 del user[4:6]
-print('Del 4,5:',user)
+print('Del 4,5:',user)					# Del 4,5: ['Top', 'Right', 'None', 'None', 'After Left']
 
 lst1 = ['One','Two','Three']
-print("Список lst1=",lst1)
-print("Элемент 'Three' находится на %d позиции"%lst1.index('Three'))
-print("Есть ли элемент 'Three' в списке:",'Three' in lst1)
-print("Есть ли элемент 'Four' в списке:",'Four' in lst1)
-print("Преобразуем список в строку:", ", ".join(lst1))
+print("Список lst1=",lst1)												# Список lst1= ['One', 'Two', 'Three']
+print("Элемент 'Three' находится на %d позиции"%lst1.index('Three'))	# Элемент 'Three' находится на 2 позиции
+print("Есть ли элемент 'Three' в списке:",'Three' in lst1)				# Есть ли элемент 'Three' в списке: True
+print("Есть ли элемент 'Four' в списке:",'Four' in lst1)				# Есть ли элемент 'Four' в списке: False
+print("Преобразуем список в строку:", ", ".join(lst1))					# Преобразуем список в строку: One, Two, Three
 
 print("===========================================")
 
@@ -129,11 +130,17 @@ def sortByFirst(tp):
 
 lst = [(7,2),(2,5)]
 lst.append((3,4))
-print("Unsorted: ",lst)
+print("Unsorted: ",lst)					# Unsorted:  [(7, 2), (2, 5), (3, 4)]
 lst.sort(key=sortByFirst)
-print("Sorted by first: ",lst)
+print("Sorted by first: ",lst)			# Sorted by first:  [(2, 5), (3, 4), (7, 2)]
 lst.sort(key=lambda a: a[1], reverse=True)
-print("Sorted by second (desc): ",lst)
+print("Sorted by second (desc): ",lst)	# Sorted by second (desc):  [(2, 5), (3, 4), (7, 2)]
+
+print("===========================================")
+lst = [28,14,'28',5,'9','1',0,6,'23', 19]
+print("lst=",lst)														# lst=[28,14,'28',5,'9','1',0,6,'23', 19]
+print("sorted(lst,key=int)=",sorted(lst,key=int))						# sorted(lst,key=int)=[0, '1', 5, 6, '9', 14, 19, '23', 28, '28']
+print("sorted(lst,key=str)=",sorted(lst,key=str))						# sorted(lst,key=str)=[0, '1', 14, 19, '23', 28, '28', 5, 6, '9']
 #----------------------------------------------------------------------------------------------- 005_Tuple.py
 c_tuple = ['Red','White','Black','Blue']
 a,b,c,d=c_tuple
