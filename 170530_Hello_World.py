@@ -252,7 +252,6 @@ MyKey2 = "Михаил" # Отсутствует в словаре, следую
 print(MyKey2,":",dict.get(MyKey2)) # None
 print(MyKey2,":",dict.setdefault(MyKey2,"студент-практикант")) # None
 
-
 print("перебор элементов:")
 for name, dolg in dict.items():
 	print(name,' - ',dolg)
@@ -264,6 +263,25 @@ for name in dict.keys():
 print("\nперебор отсортированных ключей:")
 for name in sorted(dict.keys()):
 	print(name,' - ',dict[name])
+
+print("==============================================")
+print("Словарное включение")
+DIAL_CODES = [
+	(86, 'China'),
+	(91, 'India'),
+	(1,  'United States'),
+	(62, 'Indonesia'),
+	(55, 'Brazil'),
+	(92, 'Pakistan'),
+	(880, 'Bangladesh'),
+	(234, 'Nigeria'),
+	(7,  'Russia'),
+	(81, 'Japan')
+	]
+country_code = {country: code for code, country in DIAL_CODES}
+print("all:",country_code)
+country_code1 = {code: country.upper() for country, code in country_code.items() if code<66}
+print("<66:",country_code1) 
 #----------------------------------------------------------------------------------------------- 014_random.py
 from random import random, sample
 
@@ -697,15 +715,6 @@ sm = reduce(lambda a, x: a + x, [0, 1, 2, 3, 4])
 print(sm)			# Сумма
 # pylint.exe 040_TestPylint.py >0
 #----------------------------------------------------------------------------------------------- 041 CountRunTime.py
-# -*- coding: cp1251 -*-
-''' Тестирование функции reduce '''
-
-from functools import reduce
-
-sm = reduce(lambda a, x: a + x, [0, 1, 2, 3, 4])
-print(sm)			# Сумма
-# pylint.exe 040_TestPylint.py >0
-#----------------------------------------------------------------------------------------------- 041 CountRunTime.py
 import time
 
 t_begin = time.time()
@@ -742,6 +751,145 @@ print(coefficients[0,0], "*", answers[0]," + ",coefficients[0,1], "*", answers[1
 print(coefficients[1,0], "*", answers[0]," + ",coefficients[1,1], "*", answers[1],"=",depends[1],"->",coefficients[1,0]*answers[0]+coefficients[1,1]*answers[1])
 
 ok = input("Is it ok?")
+#----------------------------------------------------------------------------------------------- 043_partial.py
+# -*- coding: cp1251 -*-
+
+from functools import partial
+
+def foo(x,y,z):
+	return x+y+z
+
+f=partial(foo,1,2)
+print(f(3))
+#----------------------------------------------------------------------------------------------- 044_compile.py
+# -*- coding: cp1251 -*-
+
+s = "for i in range(10): print(i)"
+c = compile(s,'','exec')
+exec(c)
+
+x=1
+y=2
+s2="3*x+4*y-1"
+x2=compile(s2,'','eval')
+result=eval(x2)
+print(s2,"=",result)
+#----------------------------------------------------------------------------------------------- 045 NumPy.py
+import numpy as np
+
+NumBlock = 5
+
+if NumBlock == 1: 			# np.array
+
+	a = np.arange(15).reshape(3, 5)
+	print(a)
+	print("a.shape=",a.shape)			# (3,5)
+	print("a.ndim=",a.ndim)				# 2
+	print("a.size=",a.size)				# 15
+
+	print("---------------------")
+	b = np.array([1.2, 3.5, 5.1])		# a = array(1,2,3,4) - WRONG
+	c = np.array( [ (1.5,2,3), (4,5,6) ] )
+	print(c)
+	print("---------------------")
+	d = np.array( [ [1,2], [3,4] ], dtype=complex )
+	print(d)
+	print("---------------------")
+	e = np.zeros( (3,4) )
+	f = np.ones( (2,3,4), dtype=np.int16 )
+	g = np.empty( (2,3) )
+
+	h = np.linspace( 0, 2, 9 )
+	print("linspace( 0, 2, 9 )=",h)
+
+	b = np.arange(12).reshape(4,3)		# 2d array
+elif NumBlock == 2:
+	A = np.array( [[1,1], [0,1]] )
+	B = np.array( [[2,0], [3,4]] )
+	print(A*B)							# elementwise product
+										# array([[2, 0],
+										# 		 [0, 4]])
+	print("---------------------")
+	print(np.dot(A,B))					# matrix product
+										# array([[5, 4],
+										#        [3, 4]])
+	print("---------------------")
+	a = np.random.random((2,3))
+	print(a)
+	print("sum=",a.sum())
+	print("min=",a.min())
+	print("max=",a.max())
+
+	print("---------------------")
+	b = np.arange(12).reshape(3,4)
+	print("sum=",b.sum(axis=0))			# sum of each column	array([12, 15, 18, 21])
+	print("min=",b.min(axis=1))			# min of each row		array([0, 4, 8])	
+	print("cumsum=",b.cumsum(axis=1))	# cumulative sum along each row
+										# array([[ 0,  1,  3,  6],
+										#        [ 4,  9, 15, 22],
+										#        [ 8, 17, 27, 38]])
+elif NumBlock == 3:
+
+	def f(x,y):
+		return 10*x+y
+
+	b = np.fromfunction(f,(5,4),dtype=int)
+	print(b)
+										# array([[ 0,  1,  2,  3],
+										#        [10, 11, 12, 13],
+										#        [20, 21, 22, 23],
+										#        [30, 31, 32, 33],
+										#        [40, 41, 42, 43]])
+	print("---------------------")
+	for row in b:
+		print(row)
+	print("---------------------")
+	for element in b.flat:
+		print(element)
+
+if NumBlock == 4:						# Linear Algebra
+	a = np.array([[1.0, 2.0], [3.0, 4.0]])
+	print(a)
+	print("---------------------")
+	print(a.transpose())
+	print("---------------------")
+	print(a.trace())
+	print("---------------------")
+	y = np.array([[5.], [7.]])
+	print(np.linalg.solve(a, y))
+	print("---------------------")
+if NumBlock == 5:						# Корреляция
+	x = np.array([4,5,2,3,1])
+	y = np.array([2,1,4,3,5])
+	print(np.corrcoef(x, y)[0, 1])
+#----------------------------------------------------------------------------------------------- 046 Index4For.py
+drinks = ["coffee", "tea", "milk", "water"]
+for index, drink in enumerate(drinks):
+    print("Item {} is {}".format(index, drink))
+#----------------------------------------------------------------------------------------------- 047_deque.py
+from collections import deque
+
+dq = deque(range(10), maxlen=10)
+print(dq)							# deque([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=10)
+
+dq.rotate(3)
+print(dq)                           # deque([7, 8, 9, 0, 1, 2, 3, 4, 5, 6], maxlen=10)
+
+dq.rotate(-4)						
+print(dq)                           # deque([1, 2, 3, 4, 5, 6, 7, 8, 9, 0], maxlen=10)
+
+dq.appendleft(-1)					# deque([-1, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=10)
+print(dq)
+
+dq.extend([11,22,33])				# deque([3, 4, 5, 6, 7, 8, 9, 11, 22, 33], maxlen=10)
+print(dq)
+
+dq.extendleft([10,20,30,40])		# deque([40, 30, 20, 10, 3, 4, 5, 6, 7, 8], maxlen=10)
+print(dq)
+#----------------------------------------------------------------------------------------------- 
+#----------------------------------------------------------------------------------------------- 
+#----------------------------------------------------------------------------------------------- 
+#----------------------------------------------------------------------------------------------- 
 #----------------------------------------------------------------------------------------------- 
 #----------------------------------------------------------------------------------------------- 
 #----------------------------------------------------------------------------------------------- 
