@@ -138,14 +138,22 @@ print("Sorted by second (desc): ",lst)	# Sorted by second (desc):  [(2, 5), (3, 
 
 print("===========================================")
 lst = [28,14,'28',5,'9','1',0,6,'23', 19]
-print("lst=",lst)														# lst=[28,14,'28',5,'9','1',0,6,'23', 19]
+print("lst=",lst)										# lst=[28,14,'28',5,'9','1',0,6,'23', 19]
 print("sorted(lst,key=int)=",sorted(lst,key=int))						# sorted(lst,key=int)=[0, '1', 5, 6, '9', 14, 19, '23', 28, '28']
 print("sorted(lst,key=str)=",sorted(lst,key=str))						# sorted(lst,key=str)=[0, '1', 14, 19, '23', 28, '28', 5, 6, '9']
+print("===========================================")
+one_list = 1,
+print(one_list)							# (1,)
 #----------------------------------------------------------------------------------------------- 005_Tuple.py
 c_tuple = ['Red','White','Black','Blue']
 a,b,c,d=c_tuple
-print(b)
-one_tuple = 1,
+print(b)   # White
+
+a, *b, c = c_tuple
+print(b)   # ['White', 'Black']
+
+a, *b, c, d = c_tuple
+print(b)   # ['White']
 #----------------------------------------------------------------------------------------------- 006_Set.py
 set1 = {'Red','White','Black','Blue'}
 print(len(set1))
